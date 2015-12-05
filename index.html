@@ -1,0 +1,116 @@
+<html>
+<head>
+    <title>Poker Game Winner Prediction</title>
+
+
+</head>
+
+<center><h1> Prediction of Poker Hands using the Machine Learning algorithm. <br/></h1>
+<h5>Ramprasad Narayanaswamy | Deepak Rohan Sekar (dsekar@uncc.edu) | Ganesh Ramamoorthy  (gramamoo@uncc.edu)</h5></center>
+    <br/>
+<h3> Introduction </h3>
+<p>We used the Poker Hands dataset from UCI Machine Learning Repository in a distributed environment to
+build a multi-class classifier using the Naive-Bayes classification algorithm and implement AdaBoost technique
+(forming k such classifiers with each subsequent classifier learning from the mistakes of its previous one) to
+improve its accuracy. Then, each of the classifiers formed are used to predict the outcome/label of other incoming
+poker hands and their predictions are voted with a score and the prediction with a maximum score is considered to be
+the final prediction.</p>
+
+Data set to be used: http://archive.ics.uci.edu/ml/datasets/Poker+Hand
+The data consists of 25010 training data and 1 million entries of test data.
+The total number of variables are 11
+ Feature Attributes: 10
+ Class Attribute: 1
+Sample Data:
+1,10,1,11,1,13,1,12,1,1,9
+2,11,2,13,2,10,2,12,2,1,9
+3,12,3,11,3,13,3,10,3,1,9
+4,10,4,11,4,1,4,13,4,12,9
+4,1,4,13,4,12,4,11,4,10,9
+Variables of Data:
+1. S1 "Suit of card #1"
+Ordinal (1-4) representing [Hearts, Spades, Diamonds, Clubs]
+2. C1 "Rank of card #1"
+Numerical (1-13) representing (Ace, 2, 3, … , Queen, King)
+3. S2 "Suit of card #2"
+Ordinal (1-4) representing [Hearts, Spades, Diamonds, Clubs]
+4. C2 "Rank of card #2"
+Numerical (1-13) representing (Ace, 2, 3, ... , Queen, King)
+5. S3 "Suit of card #3"
+Ordinal (1-4) representing [Hearts, Spades, Diamonds, Clubs]
+6. C3 "Rank of card #3"
+Numerical (1-13) representing (Ace, 2, 3, ... , Queen, King)
+7. S4 "Suit of card #4"
+Ordinal (1-4) representing [Hearts, Spades, Diamonds, Clubs]
+8. C4 "Rank of card #4"
+Numerical (1-13) representing (Ace, 2, 3, ... , Queen, King)
+9. S5 "Suit of card #5"
+Ordinal (1-4) representing [Hearts, Spades, Diamonds, Clubs]
+10. C5 "Rank of card 5"
+Numerical (1-13) representing (Ace, 2, 3, ... , Queen, King)
+11. CLASS "Poker Hand"
+Ordinal (0-9)
+0: Nothing in hand; not a recognized poker hand
+1: One pair; one pair of equal ranks within five cards
+2: Two pairs; two pairs of equal ranks within five cards
+3: Three of a kind; three equal ranks within five cards
+4: Straight; five cards, sequentially ranked with no gaps
+5: Flush; five cards with the same suit
+6: Full house; pair + different rank three of a kind
+7: Four of a kind; four equal ranks within five cards
+8: Straight flush; straight + flush
+9: Royal flush; {Ace, King, Queen, Jack, Ten} + flush
+Context/ Motivation for the idea:
+Playing a game of Poker is exciting. Once you get to know the poker rules, you are good to go. Why
+not design ourselves that game? Coding a poker game is pretty simple once you know the poker rules of the game and code
+it accordingly. But, is it possible to design such a game without knowing such rules? The Machine Learning concept
+enables us to do the same. Machine learning involves the study and implementation of algorithms with the needed
+data in-hand. Such algorithms build a model from example inputs (input dataset) in order to make data-driven decisions
+to solve a problem instead of following strict program instructions.
+Again, a lot of machine learning algorithms are available. But, traditionally these algorithms are implemented based
+on a sequential approach. Given a large dataset, it makes sense to parallelize the data and process it in a distributed
+environment. The Map-Reduce paradigm allows us to do it. Certain common machine learning algorithms fit the Statistical
+Query Model, allowing us to write them in “summation forms” which makes them possible to be implemented using MapReduce
+paradigm. Thus, coding a Machine Learning algorithm using Hadoop paves way to learn both the concepts in-depth.
+
+Algorithms to be used:
+Naïve-Bayes classification algorithm
+AdaBoost Technique
+Platform:
+Hadoop MapReduce
+Tasks:
+● As the Dataset is already identified, its attributes need to be understood to distinguish the data & class
+attributes to be used in the implementation.
+● The Naïve-Bayes multi-class classification algorithm is chosen.
+● The chosen classification algorithm is to be represented in a “summation form”.
+● Initial weights are assigned to each of the 25,010 records of training data.
+● Then, the 25,010 records of training data (along with weights assigned to each) is sampled and distributed
+using the MapReduce paradigm.
+● The Mappers (no. of Mappers is based on split) perform the given summation/computations on their corresponding
+data splits (partial training data) and send them to the reducer.
+● The reducer combines these partial summations to obtain the final prediction model.
+● This model is used on same dataset to perform predictions.
+● Based on these predictions, the error of the classifier is calculated and their weights are updated accordingly.
+● Then, the dataset, along with these new updated weights is sent to step 5 and the process goes on, until the error
+is reduced considerably.
+● Then, these classifier models developed is used on the 1,000,000 records of test data to perform predictions and to
+quantify the performance of the system by calculating precision & recall.
+● The prediction of the class of the hand can be used to determine the winner of a game
+Division of Responsibilities:
+Since our projects contains learning of the classification algorithms, mapping them to a “summation form” and MapReduce
+concepts and implementing them, all the three of us will be equally participating in each of the tasks defined.
+Final Product:
+Definitely Accomplish:
+Given one or more input poker hand/s, our product will define the label for each of the input hands (Ex: Royal Flush,
+Two-of-a-kind etc.) using the classifier models developed with the input training dataset.
+Like to accomplish:
+Determine the winner for the inputted test poker hands.
+Ideally like to accomplish:
+A complete simulation of the Poker game with a set of players, bets and winner.
+References:
+1. Data Mining, Concepts and Techniques - Third Edition by Jiawei Han, Micheline Kamber, Jian Pei, pages 350-355 & 380-382
+2. https://en.wikipedia.org/wiki/List_of_poker_hands
+
+
+</body>
+</html>
